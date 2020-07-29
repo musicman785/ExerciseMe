@@ -26,11 +26,17 @@ router.post("/api/workouts", ({ body }, res) => {
       res.status(400).json(err);
     });
 });
-// router.put("api/workouts/:id", (req, res) =>
-//     Workouts.find({
-//         //req.params.id
-//     })
-// )
+
+router.put("/api/workouts/:id", (req, res) => {
+  const { body, params } = req;
+  Workouts.findByIdAndUpdate(params.id, { $push: { exercises: body } })
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
 
 router.get("/api/workouts/range", (req, res) => {
   Workouts.find({})
