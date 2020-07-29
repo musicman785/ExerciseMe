@@ -16,5 +16,30 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
+router.post("/api/workouts", ({ body }, res) => {
+  Workouts.create(body)
+
+    .then((workouts) => {
+      res.json(workouts);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+// router.put("api/workouts/:id", (req, res) =>
+//     Workouts.find({
+//         //req.params.id
+//     })
+// )
+
+router.get("/api/workouts/range", (req, res) => {
+  Workouts.find({})
+    .then((workouts) => {
+      res.json(workouts);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
 //====================================
 module.exports = router;
